@@ -20,18 +20,34 @@ public class AppConfig {
 
     // 메서드명을 통해 역할 보여주기
 
+    // 예상 시나리오
+    // call AppConfig.memberService
+    // call AppConfig.memberRepository
+    // call AppConfig.memberRepository
+    // call AppConfig.orderService
+    // call AppConfig.memberRepository
+
+    // 실제 결과
+    // call AppConfig.memberService
+    // call AppConfig.memberRepository
+    // call AppConfig.orderService
+    // => 스프링이 싱글톤을 보장해주고 있음!
+
     @Bean           // 스프링 컨테이너에 등록됨
     public MemberService memberService(){
+        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());     // 생성자 주입
     }
 
     @Bean
     public MemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService(){
+        System.out.println("call AppConfig.orderService");
         return new OrderSeviceImpl(memberRepository(), discountPolicy());
     }
 
