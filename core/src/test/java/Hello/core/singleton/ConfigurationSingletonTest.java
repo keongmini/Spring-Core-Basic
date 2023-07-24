@@ -30,6 +30,18 @@ public class ConfigurationSingletonTest {
         Assertions.assertThat(memberService.getMemberRepository()).isSameAs(memberRepository);
         Assertions.assertThat(orderService.getMemberRepository()).isSameAs(memberRepository);
         // 모두 같은 인스턴스 공유
+    }
 
+    @Test
+    void configurationDeep(){
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        AppConfig bean = ac.getBean(AppConfig.class);
+
+        System.out.println("bean = " + bean.getClass());
+        // class Hello.core.AppConfig$$EnhancerBySpringCGLIB$$22f7ba0f
+        // 순수한 클래스: Hello.core.AppConfig 출력
+        // 스프링이 CGLIB라는 바이트코드 조작 라이브러리를 사용해서 AppConfig 클래스를 상속받은 다른 클래스를 만들고 해당 클래스를 스프링 빈으로 등록
+        // 해당 클래스가 싱글톤이 되도록 보장해줌!
+        // => @Configuration의 역할
     }
 }

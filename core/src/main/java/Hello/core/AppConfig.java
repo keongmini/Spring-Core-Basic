@@ -1,6 +1,5 @@
 package Hello.core;
 
-
 import Hello.core.discount.DiscountPolicy;
 import Hello.core.discount.FixDiscountPolicy;
 import Hello.core.discount.RateDiscountPolicy;
