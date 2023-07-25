@@ -5,7 +5,10 @@ import Hello.core.discount.DiscountPolicy;
 //import Hello.core.discount.RateDiscountPolicy;
 import Hello.core.member.Member;
 import Hello.core.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderSeviceImpl implements OrderService{
 
     private final MemberRepository memberRepository;
@@ -13,6 +16,7 @@ public class OrderSeviceImpl implements OrderService{
     //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();        문제점: 추상과 구체 모두에 의존 -> DIP 위반
     //    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();       문제점: fix -> rate 로 변경하는 순간 클라이언트 코드도 변경해야 함 - OCP 위반
 
+    @Autowired
     public OrderSeviceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
